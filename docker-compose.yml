@@ -1,0 +1,29 @@
+version: '3.1'
+services:
+        joomla:
+                image: joomla:3-php7.2-apache
+                restart: always
+                ports:
+                        - 1235:80
+                environment:
+                        JOOMLA_DB_HOST: db
+                        JOOMLA_DB_USER: hardik
+                        JOOMLA_DB_PASSWORD: hardik
+                        JOOMLA_DB_NAME: joomla_db
+                volumes:
+                        - joomla_:/var/www/html
+
+        db:
+                image: mysql:5.7
+                restart: always
+                environment:
+                        MYSQL_ROOT_PASSWORD: joomla
+                        MYSQL_USER: hardik
+                        MYSQL_PASSWORD: hardik
+                        MYSQL_DATABASE: joomla_db
+                volumes:
+                        - mysql_:/var/lib/mysql
+
+volumes:
+        mysql_:
+        joomla_:
